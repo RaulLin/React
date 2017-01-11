@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<style type="text/css">
+.red{
+	color: red;
+}	
+</style>
+
+<body>
+<div id="box"></div>
+<script src="react.js" type="text/javascript"></script>
+<script src="react-dom.js" type="text/javascript"></script>
+<script src="browser.min.js" type="text/javascript"></script>
+<script type="text/babel">
+	//创建组件 https://github.com/RaulLin/Wangyiyun-Music
+	var Text=React.createClass({
+		getInitialState:function(){
+			return {
+				arr:this.props.arr,
+				num:this.props.num
+			}
+		},
+		click:function(){
+			this.state.num++;
+			this.state.arr.push(<Li num={this.state.num} key={this.state.num}/>);
+			this.setState({
+				arr:this.state.arr,
+				num:this.state.num
+			})
+		},
+		render:function(){
+			return (
+				<div>
+					<input type="button" defaultValue="按钮" onClick={this.click}/>
+					<ul>
+						{
+							this.state.arr
+						}
+					</ul>
+						
+				</div>
+			)
+		}
+	})
+	var Li=React.createClass({
+		render:function(){
+			return (
+				<li>{this.props.num}</li>
+			)
+		}
+	})
+	
+	var data = {
+		arr:[],
+		num:0
+	}
+
+	
+	//渲染页面
+	ReactDOM.render(
+		<Text {...data}/>,
+		document.getElementById('box')
+	)
+</script>	
+</body>
+</html>
